@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- site metas -->
+    <title>University-bus-tracking</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- fevicon -->
+    <link rel="icon" href="images/fevicon.png" type="image/gif" />
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+<!-- body -->
+<body class="main-layout">
+    <!-- loader  -->
+    <div class="loader_bg">
+        <div class="loader"><img src="images/loading.gif" alt="#" /></div>
+    </div>
+    <!-- end loader -->
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="index.html">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </div>
+    <!-- header -->
+    <header>
+        <!-- header inner -->
+        <div class="header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4">
+                    </div>
+                    <div class="col-md-8 col-sm-8">
+                        <div class="right_bottun">
+                            <ul class="conat_info d_none ">
+                                <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                            </ul>
+                            <button class="openbtn" onclick="openNav()"><img src="images/menu_icon.png" alt="#"/> </button> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- end header inner -->
+    <!-- end header -->
+    <!-- banner -->
+    <section class="banner_main">
+        <div id="banner1" class="carousel slide banner_slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#banner1" data-slide-to="0" class="active"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="container-fluid">
+                        <div class="carousel-caption">
+                            <div class="row">
+                                <div class="col-md-7 col-lg-5">
+                                    <div class="text-bg">
+                                        <h1>University-Bus-Tracker</h1>
+                                        <span>Track your university bus in real time – stay informed and on time!</span>
+                                        <a href="login.html" class="get_now">Login &rarr;</a>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-7">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="ban_track">
+                                                <figure><img src="images/bus.png" alt="#"/></figure>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <form class="transfot" id="registrationForm">
+                                                <div class="col-md-12">
+                                                    <h3>Register Here!</h3>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <input class="transfot_form" placeholder="Name" type="text" name="Name" id="registerName" required>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <input class="transfot_form" placeholder="Email" type="email" name="Email" id="registerEmail" required>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <input class="transfot_form" placeholder="Password" type="password" name="Password" id="registerPassword" required>
+                                                </div>
+                                                <div class="col-md-12">
+                                                   <select class="transfot_form" name="Role" id="registerRole" required>
+                                                       <option value="" disabled selected>Select your role</option>
+                                                       <option value="student">Student</option>
+                                                       <option value="driver">Driver</option>
+                                                   </select>
+                                               </div>
+                                               
+                                               
+                                               
+                                                <div class="col-md-12">
+                                                    <button type="submit" id ="submitBtn" class="get_now">Register</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end banner -->
+    <!-- about section -->
+    <div id="about" class="about ">
+        <div class="container">
+            <div class="row d_flex">
+                <div class="col-md-6">
+                    <div class="about_right">
+                        <figure><img src="images/about.png" alt="#"/></figure>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="titlepage">
+                        <h2>About Us</h2>
+                        <p>At VIT-AP University, we prioritize the safety and convenience of our students. Our innovative Bus Tracking System is designed to provide real-time updates on bus locations, ensuring that you never miss a ride again. Our mission is to enhance campus mobility by offering a reliable transportation solution that empowers students to plan their journeys effectively. With user-friendly features and accurate tracking technology, we aim to create a seamless commuting experience for everyone. Join us in revolutionizing campus transportation and enjoy the peace of mind that comes with knowing exactly when your bus will arrive! For more information or assistance, please feel free to contact us.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- about section -->
+    <!-- choose section -->
+    <div class="choose">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="titlepage">
+                        <h2>Why Choose Us</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="choose_box">
+                        <i><img src="images/why1.png" alt="#"/></i>
+                        <h3>Our Vision</h3>
+                        <p>Stay updated with live bus locations and estimated arrival times, ensuring you never miss your ride.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end choose section -->
+    <!-- contact section -->
+    <div id="contact" class="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="titlepage">
+                        <h2>Love to have your precious suggestions!</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="con_bg">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-5">
+                        <form id="request" class="main_form">
+                            <div class="row">
+                                <div class="col-md-12 ">
+                                    <input class="contactus" placeholder="Name" type="text" name="Name"> 
+                                </div>
+                                <div class="col-md-12">
+                                    <input class="contactus" placeholder="Email" type="text" name="Email"> 
+                                </div>
+                                <div class="col-md-12">
+                                    <input class="contactus" placeholder="Phone Number" type="text" name="Phone Number">                          
+                                </div>
+                                <div class="col-md-12">
+                                    <input class="contactusmess" placeholder="Message" type="text" name="Message"> 
+                                </div>
+                                <div class="col-md-12">
+                                    <button class="send_btn">Send</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-5 offset-md-1">
+                        <div class="contact_bg">
+                            <figure><img src="images/contact.png" alt="#"/></figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end contact section -->
+    <!-- footer -->
+    <footer>
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="social">
+                            <ul class="social_links">
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- end footer -->
+    <!-- javascript files -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/custom.js"></script>
+    <script>
+      // Handle registration form submission
+      document.getElementById('registrationForm').addEventListener('submit', function(event) {
+          event.preventDefault(); // Prevent the default form submission
+          
+          // Gather input data
+          const name = document.getElementById('registerName').value;
+          const email = document.getElementById('registerEmail').value;
+          const password = document.getElementById('registerPassword').value;
+          const role = document.getElementById('registerRole').value;
+  
+          // Basic validation
+          if (!name || !email || !password || !role) {
+              alert('Please fill in all fields.');
+              return;
+          }
+  
+          // Disable the submit button to prevent multiple submissions
+          const submitButton = document.getElementById('submitBtn'); // Make sure this ID matches your button
+          submitButton.disabled = true;
+  
+          // Send data to backend API
+          fetch('http://localhost:5000/api/auth/userregister', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ name, email, password, role })
+          })
+          .then(response => response.json())
+          .then(data => {
+              // Handle response data (success or error)
+              if (data.success) {
+                  alert('Registration successful! You can now log in.');
+                  // Clear the input fields
+                  document.getElementById('registrationForm').reset();
+              } else {
+                  alert('Registration failed: ' + data.message);
+              }
+          })
+          .catch(error => {
+              console.error('Error:', error);
+              alert('An error occurred. Please try again.');
+          })
+          .finally(() => {
+              // Re-enable the submit button
+              submitButton.disabled = false;
+          });
+      });
+  </script>
+  
+</body>
+</html>
