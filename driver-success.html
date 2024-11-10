@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - University Bus Tracking</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+</head>
+<body class="main-layout">
+    <!-- banner -->
+    <section class="banner_main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="carousel-caption">
+                        <div class="text-bg">
+                            <h1>University-Bus-Tracker</h1>
+                            <span>Login to track your university bus in real time!</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-primary">STOP</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end banner -->
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script>
+        var token;
+        var lat;
+        var long;
+        var busId = localStorage.getItem("currentBusId");
+
+        if(!navigator.geolocation) {
+            console.log("Your browser doesn't support geolocation feature!")
+        } else {
+            console.log("trying to fetch the result")
+            navigator.geolocation.getCurrentPosition(getPosition, errorPosition)
+        }
+    
+        function getPosition(position){
+            console.log(position);
+            lat = position.coords.latitude
+            long = position.coords.longitude
+        }
+
+        function errorPosition(a){
+            console.log(a);
+            alert("error fetching position");
+        }
+
+        const updateLocation = () => {
+            fetch(`http://localhost:5000/api/bus/location/${busId}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type" : "application/json",
+                    "x-auth-token" : token.trim()
+                },
+                body : JSON.stringify({
+                    latitude : lat,
+                    longitude : long
+                })
+            })
+            .then(data => data.json())
+            .then(res => {
+                console.log(res);
+                // alert("success");
+            })
+            .catch(e => console.error(e));
+        }
+
+        window.onload = () => {
+            token = localStorage.getItem("loginData");
+            console.log(token)
+            if(!token) {
+                alert("401: Login to access this");
+                window.location.href = "login.html"
+            }
+            //updateLocation();
+        }
+
+        setInterval(
+            updateLocation,
+            30 * 1000
+        );
+
+    </script>
+</body>
+</html>

@@ -40,33 +40,37 @@
     });
     osm.addTo(map);
 
-    if(!navigator.geolocation) {
-        console.log("Your browser doesn't support geolocation feature!")
-    } else {
-        navigator.geolocation.getCurrentPosition(getPosition)
+    function updateLocation() {
+        if(!navigator.geolocation) {
+            console.log("Your browser doesn't support geolocation feature!")
+        } else {
+            navigator.geolocation.getCurrentPosition(getPosition, errorPosition);
+        }
     }
 
     var marker, circle;
+    var busId = localStorage.getItem("currentTrackId");
+    var destLat=17.6868;
+    var destLong=83.2185;
+
+    var lat;
+    var long;
 
     function getPosition(position){
         console.log(position)
-        var lat = position.coords.latitude
-        var long = position.coords.longitude
+        lat = position.coords.latitude
+        long = position.coords.longitude
         var accuracy = position.coords.accuracy
 
-        var destLat=17.6868;
-        var destLong=83.2185;
+        console.log(lat)
+        console.log(long)
+
+        //destLat=17.6868;
+        //destLong=83.2185;
 
         var vitapLat = 16.4954;
         var vitapLong = 80.5001;
 
-        // if(marker) {
-        //     map.removeLayer(marker)
-        // }
-
-        // if(circle) {
-        //     map.removeLayer(circle)
-        // } 
 
         marker = L.marker([lat, long], {
             "title" : "your location"
@@ -79,7 +83,6 @@
         var destFeatureGroup = L.featureGroup([marker, circle]).addTo(map)
         
         marker = L.marker([vitapLat, vitapLong])
-        // circle = L.circle([destLat, destLong], {radius: accuracy})
         var vitapFeatureGroup = L.featureGroup([marker]).addTo(map)
 
         var latlng1 = L.latLng(lat, long);
@@ -103,4 +106,33 @@
         map.fitBounds(polyline.getBounds());
     }
 
+    function fetchBusLocation() {
+        console.log("i am here : " + busId);
+
+        fetch(`http://localhost:5000/api/bus/track-bus/${busId}`)
+        .then(a => a.json())
+        .then(data => {
+            console.log(data);
+            destLat=data.latitude;
+            destLong=data.longitude;
+
+
+        })
+        .catch(e => console.log(e));
+    }
+
+    function errorPosition(a){
+        console.log(a);
+        alert("error fetching position");
+    }
+
+    
+    setInterval(
+        fetchBusLocation,
+        30 * 1000
+    )
+    setInterval(
+        updateLocation,
+        30 * 1000
+    )
 </script>

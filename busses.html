@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - University Bus Tracking</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+</head>
+<body class="main-layout">
+    <!-- banner -->
+    <section class="banner_main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="carousel-caption">
+                        <div class="text-bg">
+                            <h1>University-Bus-Tracker</h1>
+                            <span>Login to track your university bus in real time!</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <form action="" id="form">
+                        <select name="busId" id="busIds">
+                        </select>
+                        <button class="btn btn-primary">TRACK</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end banner -->
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script>
+        var token;
+        var lat;
+        var long;
+        var busId = localStorage.getItem("currentBusId");
+
+        if(!navigator.geolocation) {
+            console.log("Your browser doesn't support geolocation feature!")
+        } else {
+            navigator.geolocation.getCurrentPosition(getPosition, errorPosition)
+        }
+    
+        function getPosition(position){
+            console.log(position);
+            lat = position.coords.latitude
+            long = position.coords.longitude
+        }
+
+        function errorPosition(a){
+            console.log(a);
+            alert("error fetching position");
+        }
+
+        let busIds = document.getElementById("busIds");
+
+        window.onload = () => {
+            token = localStorage.getItem("loginData");
+            console.log(token)
+            if(!token) {
+                alert("401: Login to access this");
+                window.location.href = "login.html"
+            }
+            fetchBusDetails();
+        }
+
+        function fetchBusDetails() {
+            fetch("http://localhost:5000/api/bus/get-busses")
+            .then(b => b.json())
+            .then(data => {
+                busIds.innerHTML = "<option value=''>--select--</option>";
+                for(let i = 0; i < data.length; i++) {
+                    busIds.append(getOption(data[i].busId));
+                }
+            })
+            .catch(e => console.log(e));
+        }
+
+        function getOption(id) {
+            let option = document.createElement("option");
+            option.textContent = id;
+            option.value = id;
+
+            return option;
+        }
+
+        document.getElementById("form").onsubmit = (e) => {
+            e.preventDefault();
+            localStorage.setItem("currentTrackId", busIds.value);
+            alert("tracking buss");
+            window.location.href = "map.html";
+        }
+
+        //setInterval(
+        //    updateLocation,
+        //    30 * 1000
+        //);
+
+    </script>
+</body>
+</html>

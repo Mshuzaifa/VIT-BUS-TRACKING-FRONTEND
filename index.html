@@ -274,7 +274,8 @@
               if (data.success) {
                   alert('Registration successful! You can now log in.');
                   // Clear the input fields
-                  document.getElementById('registrationForm').reset();
+                  // document.getElementById('registrationForm').reset();
+                  window.location.href = 'login.html';
               } else {
                   alert('Registration failed: ' + data.message);
               }

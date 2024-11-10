@@ -69,8 +69,10 @@
                     alert('Login failed: ' + data.error);
                 } else {
                     // Check user role
+                    localStorage.setItem("loginData", data.token);
                     if (data.role === 'driver') {
                         // Redirect to driver's dashboard
+                        console.log(data);
                         window.location.href = 'driver-dashboard.html'; // Change this to your desired driver page
                     } else {
                         // Redirect to student dashboard or other user page

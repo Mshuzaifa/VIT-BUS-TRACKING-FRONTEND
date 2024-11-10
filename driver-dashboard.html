@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
 </head>
 <body class="main-layout">
     <!-- banner -->
@@ -27,11 +30,11 @@
                         <form id="loginForm" class="mt-3">
                             <div class="mb-3">
                                 <label for="email" class="form-label">Bus Number</label>
-                                <input type="text" placeholder="Ex : AP31TQ1111" class="form-control" id="email" required>
+                                <input type="text" placeholder="Ex : AP31TQ1111" class="form-control" id="busId" required>
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Phone Number</label>
-                                <input type="text" placeholder="Ex : 9999999999" class="form-control" id="password" required>
+                                <input type="text" placeholder="Ex : 9999999999" class="form-control" id="phone" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Start</button>
                         </form>
@@ -45,6 +48,68 @@
 
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script>
+        var token;
+        var lat;
+        var long;
 
+        if(!navigator.geolocation) {
+            console.log("Your browser doesn't support geolocation feature!")
+        } else {
+            console.log("trying to fetch the result")
+            navigator.geolocation.getCurrentPosition(getPosition, errorPosition)
+        }
+    
+        function getPosition(position){
+            console.log(position);
+            lat = position.coords.latitude
+            long = position.coords.longitude
+        }
+
+        function errorPosition(a){
+            console.log(a);
+            alert("error fetching position");
+        }
+
+        const updateLocation = () => {
+            fetch("http://localhost:5000/api/bus/start", {
+                method: "POST",
+                headers: {
+                    "Content-Type" : "application/json",
+                    "x-auth-token" : token.trim()
+                },
+                body : JSON.stringify({
+                    busId : document.getElementById("busId").value,
+                    phoneNumber : document.getElementById("phone").value,
+                    latitude : lat,
+                    longitude : long
+                })
+            })
+            .then(data => data.json())
+            .then(res => {
+                console.log(res);
+                localStorage.setItem("currentBusId", document.getElementById("busId").value);
+                alert("success");
+                window.location.href = "driver-success.html";
+            })
+            .catch(e => console.error(e));
+        }
+
+        window.onload = () => {
+            token = localStorage.getItem("loginData");
+            console.log(token)
+            if(!token) {
+                alert("401: Login to access this");
+                window.location.href = "login.html"
+            }
+            //updateLocation();
+        }
+
+        document.getElementById("loginForm").onsubmit = (e) => {
+            e.preventDefault();
+            updateLocation();
+        }
+
+    </script>
 </body>
 </html>
