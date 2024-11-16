@@ -48,7 +48,7 @@
         }
     }
 
-    var marker, circle;
+    var marker, circle, destmarker, destcircle;
     var busId = localStorage.getItem("currentTrackId");
     var destLat=17.6868;
     var destLong=83.2185;
@@ -66,24 +66,45 @@
         console.log(long)
 
         //destLat=17.6868;
-        //destLong=83.2185;
+        //destLong=83.2185;                 
 
         var vitapLat = 16.4954;
         var vitapLong = 80.5001;
+
+        if(marker) {
+            map.removeLayer(marker)
+        }
+
+        if(circle) {
+            map.removeLayer(circle)
+        }
+        if(destmarker) {
+            map.removeLayer(destmarker)
+        }
+
+        if(destcircle) {
+            map.removeLayer(destcircle)
+        }
+
 
 
         marker = L.marker([lat, long], {
             "title" : "your location"
         })
-        circle = L.circle([lat, long], {radius: accuracy})
+        circle = L.circle([lat, long])
         var featureGroup = L.featureGroup([marker, circle]).addTo(map)
         
-        marker = L.marker([destLat, destLong])
-        circle = L.circle([destLat, destLong], {radius: accuracy})
-        var destFeatureGroup = L.featureGroup([marker, circle]).addTo(map)
+        destmarker = L.marker([destLat, destLong], {
+            "title" : "bus location"
+        })
+        destcircle = L.circle([destLat, destLong])
+        //circle = L.circle([destLat, destLong])
+        var destFeatureGroup = L.featureGroup([destmarker, destcircle]).addTo(map)
         
-        marker = L.marker([vitapLat, vitapLong])
-        var vitapFeatureGroup = L.featureGroup([marker]).addTo(map)
+        vitapmarker = L.marker([vitapLat, vitapLong], {
+            "title" : "VIT-AP Location"
+        })
+        var vitapFeatureGroup = L.featureGroup([vitapmarker]).addTo(map)
 
         var latlng1 = L.latLng(lat, long);
         var latlng2 = L.latLng(destLat, destLong);
