@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <button class="btn btn-primary">STOP</button>
+                    <button type="button" id="stopBtn" class="btn btn-primary">STOP</button>
                 </div>
             </div>
         </div>
@@ -93,6 +93,23 @@
             updateLocation,
             30 * 1000
         );
+
+        document.getElementById("stopBtn").onclick = () => {
+            fetch(`https://bus-tracking-5h1a.onrender.com/api/bus/stop-bus/${busId}/`, {
+                headers: {
+                    "Content-Type" : "application/json",
+                    "x-auth-token" : token.trim()
+                }
+            })
+            .then(data => data.json())
+            .then(res => {
+                console.log(res);
+                alert("success");
+                localStorage.removeItem("currentBusId");
+                window.location.href="driver-dashbord.html"
+            })
+            .catch(e => console.error(e));
+        }
 
     </script>
 </body>
