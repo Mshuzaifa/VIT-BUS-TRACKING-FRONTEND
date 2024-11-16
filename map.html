@@ -68,8 +68,8 @@
         //destLat=17.6868;
         //destLong=83.2185;                 
 
-        var vitapLat = 16.4954;
-        var vitapLong = 80.5001;
+        // var vitapLat = 16.4954;
+        // var vitapLong = 80.5001;
 
         if(marker) {
             map.removeLayer(marker)
@@ -101,10 +101,10 @@
         //circle = L.circle([destLat, destLong])
         var destFeatureGroup = L.featureGroup([destmarker, destcircle]).addTo(map)
         
-        vitapmarker = L.marker([vitapLat, vitapLong], {
-            "title" : "VIT-AP Location"
-        })
-        var vitapFeatureGroup = L.featureGroup([vitapmarker]).addTo(map)
+        // vitapmarker = L.marker([vitapLat, vitapLong], {
+        //     "title" : "VIT-AP Location"
+        // })
+        // var vitapFeatureGroup = L.featureGroup([vitapmarker]).addTo(map)
 
         var latlng1 = L.latLng(lat, long);
         var latlng2 = L.latLng(destLat, destLong);
@@ -116,10 +116,10 @@
         // console.log("Your coordinate is: Lat: "+ lat +" Long: "+ long+ " Accuracy: "+ accuracy)
 
         // create a red polyline from an array of LatLng points
-        var latlngs = [
-            [vitapLat, vitapLong],
-            [destLat, destLong]
-        ];
+        // var latlngs = [
+        //     [vitapLat, vitapLong]
+        //     [destLat, destLong]
+        // ];
 
         var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
 
