@@ -60,7 +60,7 @@
         }
 
         const updateLocation = () => {
-            fetch(`http://localhost:5000/api/bus/location/${busId}`, {
+            fetch(`https://bus-tracking-5h1a.onrender.com/api/bus/location/${busId}/`, {
                 method: "POST",
                 headers: {
                     "Content-Type" : "application/json",

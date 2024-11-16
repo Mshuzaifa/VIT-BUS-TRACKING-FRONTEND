@@ -75,7 +75,7 @@
         }
 
         function fetchBusDetails() {
-            fetch("http://localhost:5000/api/bus/get-busses")
+            fetch("https://bus-tracking-5h1a.onrender.com/api/bus/get-busses/")
             .then(b => b.json())
             .then(data => {
                 busIds.innerHTML = "<option value=''>--select--</option>";
