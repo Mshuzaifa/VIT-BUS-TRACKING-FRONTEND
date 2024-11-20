@@ -44,22 +44,19 @@
         if(!navigator.geolocation) {
             console.log("Your browser doesn't support geolocation feature!")
         } else {
-            console.log("trying to fetch the result")
+            console.log("trying to fetch the updated location")
             navigator.geolocation.getCurrentPosition(getPosition, errorPosition)
-        }
-    
-        function getPosition(position){
-            console.log(position);
-            lat = position.coords.latitude
-            long = position.coords.longitude
-        }
-
-        function errorPosition(a){
-            console.log(a);
-            alert("error fetching position");
         }
 
         const updateLocation = () => {
+
+            if(!navigator.geolocation) {
+                console.log("Your browser doesn't support geolocation feature!")
+            } else {
+                console.log("trying to fetch the result")
+                navigator.geolocation.getCurrentPosition(getPosition, errorPosition)
+            }
+
             fetch(`https://bus-tracking-5h1a.onrender.com/api/bus/location/${busId}/`, {
                 method: "POST",
                 headers: {
@@ -87,6 +84,17 @@
                 window.location.href = "login.html"
             }
             //updateLocation();
+        }
+
+        function getPosition(position){
+            console.log(position);
+            lat = position.coords.latitude
+            long = position.coords.longitude
+        }
+
+        function errorPosition(a){
+            console.log(a);
+            alert("error fetching position");
         }
 
         setInterval(
